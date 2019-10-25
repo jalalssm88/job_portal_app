@@ -5,7 +5,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 const TabsStack = createBottomTabNavigator({
-  Home: { screen: HomeScreen,
+  HomeScreen: { screen: HomeScreen,
     navigationOptions : {
       tabBarLabel: 'Home',
       labeled: true,
@@ -16,7 +16,7 @@ const TabsStack = createBottomTabNavigator({
   },
 },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'HomeScreen',
     tabBarOptions: {
       activeTintColor: '#fff',
       inactiveTintColor:'#000',

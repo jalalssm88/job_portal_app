@@ -109,6 +109,14 @@ router.get('/users', (req, res)=>{
         })
     })
 })
-
+router.get('/userslist', (req, res)=>{
+   const data = {
+       "id":"5",
+       "name":"jalal uddin"
+   }
+    res.json({
+        user:data
+    })
+})
 
 module.exports = router;

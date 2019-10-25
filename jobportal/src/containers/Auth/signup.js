@@ -4,6 +4,9 @@ Item, Label, Input, View, Spinner } from 'native-base';
 import {Image, TextInput, TouchableOpacity} from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import styles from './Style'
+import { connect } from "react-redux";
+import { AuthActions } from '../../store/actions/';
+
 
 
 class SignupScreen extends React.Component {
@@ -17,9 +20,31 @@ class SignupScreen extends React.Component {
      }
    }
 
-   create = ()=>{
-     this.props.navigation.navigate('Home')
-   }
+  componentWillReceiveProps(nextProps){
+    console.log('running next prosps')
+    console.log('next props', nextProps)
+    if(nextProps.user.status =="success"){
+      this.props.navigation.navigate('LoginScreen')
+    }
+
+    this.setState({
+        name:'',
+       email:'',
+       password:'',
+       role:''
+    })
+    // if(nextProps.errorLoginMsg){
+    //     Alert.alert("Login Failed", nextProps.errorLoginMsg);
+    // }
+    // else if(!nextProps.user.isNull()){
+    //   this.props.navigator.replace({name: 'main'});
+    // }
+  }
+
+    createUser = ()=>{
+      this.props.createUserData(this.state)
+    }
+
     render() {
      
       return (
@@ -51,7 +76,7 @@ class SignupScreen extends React.Component {
             onChangeText={(role) => this.setState({role})}
             value={this.state.role}
           />
-          <TouchableOpacity onPress={this.create} style={styles.buttons}>
+          <TouchableOpacity onPress={this.createUser} style={styles.buttons}>
             <Text style={{color:"white"}}>Create</Text>
           </TouchableOpacity>
         </View>
@@ -59,5 +84,17 @@ class SignupScreen extends React.Component {
     }
 }
 
+const mapStateToProps = (state) => {
+  console.log('mapstattoprops in signup component', state)
+  return {
+    user:state.Auth.user,
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createUserData: payload => dispatch(AuthActions.createUserData(payload)),
+  }
+}
 
-export default SignupScreen;
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignupScreen);

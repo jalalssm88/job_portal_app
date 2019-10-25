@@ -6,19 +6,19 @@ export default StyleSheet.create({
         height:800, 
         width:'100%', 
         backgroundColor:'rgba(0,0,0,0.7)', 
-        paddingHorizontal:20
+        paddingHorizontal:20,
     },
     logoContainer:{
         width:'100%', 
-        height:150, 
+        height:180, 
         alignItems:"center", 
         justifyContent:'center'
     },
     buttonsContainer:{
         width:'100%',
-        height:400,
+        height:300,
         justifyContent:'center',
-        alignItems:'center'
+        alignItems:'center',
     },
     buttons:{
         height:50,

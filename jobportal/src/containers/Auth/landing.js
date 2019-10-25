@@ -20,17 +20,17 @@ class LandingScreen extends React.Component {
                   <Image source={(require('../../images/logo.png'))} style={{width:150, height:80}}/>
                 </View>
                 <View>
-                  <Text style={{color:'white', fontSize:18}}>Find your desired job in your
+                  <Text style={{color:'white', fontSize:18, textAlign:'center',}}>Find your desired job in your
                     favrioute company, 
                     Apply easy on from your mobile app, register,
                     login, see daily updates of new job of according to your need
                   </Text>
                 </View>
                 <View style={styles.buttonsContainer}>
-                  <TouchableOpacity onPress={this.gotoSignup} style={styles.buttons}>
+                  <TouchableOpacity onPress={this.gotoSignup} style={[styles.buttons,{marginBottom:10}]}>
                     <Text style={{color:"white"}}>Signup</Text>
                   </TouchableOpacity>
-                  <Text style={{fontSize:20, color:'white'}}>OR</Text>
+                  <Text style={{fontSize:20, color:'white', marginBottom:10}}>OR</Text>
                   <TouchableOpacity onPress={this.gotoLogin} style={styles.buttons}>
                     <Text style={{color:"white"}}>login</Text>
                   </TouchableOpacity>
