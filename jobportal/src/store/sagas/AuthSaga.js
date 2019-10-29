@@ -16,6 +16,8 @@ export function* signupUser(action) {
  
     if (response) {
         yield put({ type: AuthActions.CREATE_USER_DATA_SUCESS, payload:response.data })
+        NavigationServices.navigate("LoginScreen")
+
         // NavigationServices.reset("LoginScreen")
         // // this.props.navigation.navigate('LoginScreen')
         // dispatch(NavigationActions.navigate({ routeName: 'LoginScreen' }));
@@ -35,12 +37,12 @@ export function* loginUser(action) {
  
     if (response.status == 200) {
         try{
-            AsyncStorage.setItem("user", JSON.stringify(response.data.data.token))
+            AsyncStorage.setItem("user", JSON.stringify(response.data))
         }catch{
 
         }
         yield put({ type: AuthActions.LOGIN_USER_DATA_SUCESS, payload:response.data})
-        NavigationServices.navigate("HomeScreen")
+        NavigationServices.reset("TabStack")
     }
    
 }

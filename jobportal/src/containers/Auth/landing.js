@@ -1,10 +1,32 @@
 import React, { Component } from 'react';
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Text, Form,
 Item, Label, Input, View, Spinner } from 'native-base';
-import {Image, TouchableOpacity, ImageBackground} from 'react-native';
+import {Image, TouchableOpacity, ImageBackground, AsyncStorage} from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
+import NavigationServices from './../../services/NavigationServices'
 import styles from './Style'
+import { connect } from "react-redux";
+import { AuthActions } from '../../store/actions/';
+
 class LandingScreen extends React.Component {
+  constructor(props){
+    super(props);
+    // this.getUser();
+  }
+  getUser = () => {
+    console.log('async storage', AsyncStorage.getItem('user'))
+    AsyncStorage.getItem("user").then((user) => {
+      console.log('usrrrrrrrrrrr', user)
+        if (user) {
+            let parsedData = JSON.parse(user);
+            this.props.login(parsedData);
+            NavigationServices.reset("TabStack")
+        }
+        else {
+          this.props.navigation.navigate('LoginScreen');
+        }
+    })
+}
   gotoLogin = () =>{
     this.props.navigation.navigate('LoginScreen')
   }
@@ -42,4 +64,18 @@ class LandingScreen extends React.Component {
     }
 }
 
-export default LandingScreen;
+const mapStateToProps = (state) => {
+  console.log('mapstattoprops in landing component', state)
+  return {
+    user:state.Auth.user,
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loginUserData: payload => dispatch(AuthActions.loginUserData(payload)),
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(LandingScreen);
+

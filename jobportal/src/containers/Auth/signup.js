@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Text, Form,
 Item, Label, Input, View, Spinner } from 'native-base';
-import {Image, TextInput, TouchableOpacity} from 'react-native';
+import {Image, TextInput, TouchableOpacity, Picker} from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import styles from './Style'
 import { connect } from "react-redux";
 import { AuthActions } from '../../store/actions/';
-
+import RNPickerSelect from 'react-native-picker-select';
 
 
 class SignupScreen extends React.Component {
@@ -20,26 +20,19 @@ class SignupScreen extends React.Component {
      }
    }
 
-  componentWillReceiveProps(nextProps){
-    console.log('running next prosps')
-    console.log('next props', nextProps)
-    if(nextProps.user.status =="success"){
-      this.props.navigation.navigate('LoginScreen')
-    }
-
-    this.setState({
-        name:'',
-       email:'',
-       password:'',
-       role:''
-    })
-    // if(nextProps.errorLoginMsg){
-    //     Alert.alert("Login Failed", nextProps.errorLoginMsg);
-    // }
-    // else if(!nextProps.user.isNull()){
-    //   this.props.navigator.replace({name: 'main'});
-    // }
-  }
+  // componentWillReceiveProps(nextProps){
+  //   console.log('running next prosps')
+  //   console.log('next props', nextProps)
+  //   if(nextProps.user.status =="success"){
+  //     this.props.navigation.navigate('LoginScreen')
+  //   }
+  //   this.setState({
+  //       name:'',
+  //      email:'',
+  //      password:'',
+  //      role:''
+  //   })
+  // }
 
     createUser = ()=>{
       this.props.createUserData(this.state)
@@ -70,15 +63,36 @@ class SignupScreen extends React.Component {
             onChangeText={(password) => this.setState({password})}
             value={this.state.password}
           />
-           <TextInput
-            style={styles.textInput}
-            placeholder="Role"
-            onChangeText={(role) => this.setState({role})}
-            value={this.state.role}
-          />
+
+          <View
+            style={styles.textInput}>
+            <Picker
+              selectedValue={this.state.language}
+              style={{
+                height: 50,
+                width: "100%",
+                color: 'white',
+              }}
+              onValueChange={(itemValue, itemIndex) =>
+                this.setState({ language: itemValue })
+              }>
+              <Picker.Item label="Java" value="java" />
+              <Picker.Item label="JavaScript" value="js" />
+            </Picker>
+          </View>
+
+          <RNPickerSelect
+            onValueChange={(value) => console.log(value)}
+            items={[
+                { label: 'Football', value: 'football' },
+                { label: 'Baseball', value: 'baseball' },
+                { label: 'Hockey', value: 'hockey' },
+            ]}
+        />
+{/*            
           <TouchableOpacity onPress={this.createUser} style={styles.buttons}>
             <Text style={{color:"white"}}>Create</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       );
     }
