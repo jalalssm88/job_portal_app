@@ -31,7 +31,7 @@ router.post('/signup', (req,res,next)=> {
                     })
                     new_user.save()
                     .then(result=> {
-                        res.status(201).json({
+                        res.status(200).json({
                             status: "success",
                             message: "User successfully created"
                         })

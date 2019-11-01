@@ -47,5 +47,16 @@ export default StyleSheet.create({
         fontSize:18,
         marginBottom:30
     },
+    android: {
+        fontSize: 16,
+        paddingTop: 13,
+        paddingHorizontal: 10,
+        paddingBottom: 12,
+        borderWidth: 1,
+        borderColor: 'gray',
+        borderRadius: 4,
+        backgroundColor: 'white',
+        color: 'blue',
+    },
  
 })

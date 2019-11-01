@@ -40,8 +40,6 @@ class LoginScreen extends React.Component {
       })
   }
 
-
-
    singUp =()=>{
     this.props.loginUserData({email:this.state.email, password:this.state.password})
    }
